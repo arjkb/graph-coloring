@@ -3,3 +3,4 @@ random
 randomgraph
 sig
 *.o
+*.out
