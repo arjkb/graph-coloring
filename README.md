@@ -15,23 +15,23 @@ git clone https://github.com/arjunkrishnababu96/graph-coloring.git
 ### Makefile Usage
 A `Makefile` is included to compile the `.c` files. To compile `greedy.c` for instance, run:
 ```
-$ make greedy
+make greedy
 ```
 This would create an executable with the name `greedy`. To run this executable, type:
 ```
-$ ./greedy
+./greedy
 ```
 
 (`greedy` expects command-line arguments, which have been omitted above).
 
 To compile and create executables for all `.c` source files, run:
 ```
-$ make
+make
 ```
 
 To remove all object files and executables, run:
 ```
-$ make clean
+make clean
 ```
 ---
 ### Python Script to Create Graphs
@@ -41,7 +41,7 @@ $ make clean
 
 To know more about its usage, see the documentation:
 ```
-$ python creategraph.py --help
+python creategraph.py --help
 ```
 
 The documentation for `creategraph.py` is self-explanatory.
