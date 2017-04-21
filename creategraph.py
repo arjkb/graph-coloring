@@ -1,4 +1,5 @@
 import argparse
+import subprocess
 
 
 def main():
@@ -14,6 +15,11 @@ def main():
     print(" N step: ", args.n_step)
     print(" M start: ", args.m_start)
     print(" M step: ", args.m_step)
+
+    randomgraph_result = subprocess.run(["./randomgraph", str(args.n_start), str(args.m_start)],
+                                        encoding='utf-8',
+                                        stdout=subprocess.PIPE)
+    print(randomgraph_result.stdout)
 
 
 if __name__ == '__main__':
