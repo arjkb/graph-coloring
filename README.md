@@ -11,7 +11,7 @@ To get started, clone this repo:
 ```
 git clone https://github.com/arjunkrishnababu96/graph-coloring.git
 ```
-
+---
 ### Makefile Usage
 A `Makefile` is included to compile the `.c` files. To compile `greedy.c` for instance, run:
 ```
@@ -33,7 +33,7 @@ To remove all object files and executables, run:
 ```
 $ make clean
 ```
-
+---
 ### Python Script to Create Graphs
 **Requires [Python 3.6](https://www.python.org/downloads/release/python-360/)**
 
