@@ -12,7 +12,7 @@ To get started, clone this repo:
 git clone https://github.com/arjunkrishnababu96/graph-coloring.git
 ```
 
-#### Makefile Usage
+### Makefile Usage
 A `Makefile` is included to compile the `.c` files. To compile `greedy.c` for instance, run:
 ```
 $ make greedy
@@ -34,12 +34,12 @@ To remove all object files and executables, run:
 $ make clean
 ```
 
-#### Python Script to Create Graphs
+### Python Script to Create Graphs
 **Requires [Python 3.6](https://www.python.org/downloads/release/python-360/)**
 
-A python script `creategraph.py` has been provided to automatically generate graphs based on parameters passed as input to it. It internally runs `randomgraph.c`.
+`creategraph.py` automatically generates graphs based on parameters passed as input to it. It internally runs `randomgraph.c`.
 
-To see documentation for `creategraph.py`, type:
+To know more about its usage, see the documentation:
 ```
 $ python creategraph.py --help
 ```
