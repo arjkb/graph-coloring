@@ -30,15 +30,18 @@ def main():
     else:
         print(" Seed NOT present")
 
-    # randomgraph_result = subprocess.run(["./randomgraph", str(args.n_start), str(args.m_start)],
-    #                                     encoding='utf-8',
-    #                                     stdout=subprocess.PIPE)
-    # print(randomgraph_result.stdout)
-
     for n in range(args.n_start, args.n_finish, args.n_step):
         for m in range(args.m_start, args.m_finish, args.m_step):
             filename = "{0}_{1}_{2}.out".format(args.output, n, m)
             print("{0} {1} Filename: {2}".format(n, m, filename))
+
+            randomgraph_result = subprocess.run(["./randomgraph", str(n), str(m)],
+                                                encoding='utf-8',
+                                                stdout=subprocess.PIPE)
+            # print(randomgraph_result.stdout)
+
+            with open(filename, mode='w', encoding='utf-8') as output_file:
+                output_file.write(randomgraph_result.stdout)
 
 
 if __name__ == '__main__':
