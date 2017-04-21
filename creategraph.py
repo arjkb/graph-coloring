@@ -4,6 +4,7 @@ import subprocess
 
 def main():
     parser = argparse.ArgumentParser()
+    parser.add_argument("output", help="output file prefix", type=str)
     parser.add_argument("n_start", help="number of initial vertices", type=int)
     parser.add_argument("n_iter", help="number of iterations for vertices", type=int)
     parser.add_argument("n_step", help="number of vertices to increment each iteration", type=int)
@@ -13,6 +14,8 @@ def main():
     parser.add_argument("-s", "--seed", help="seed value for randomgraph", type=int)
 
     args = parser.parse_args()
+
+    print(" Output file prefix: ", args.output)
 
     print(" N start: ", args.n_start)
     print(" N iter: ", args.n_iter)
@@ -26,6 +29,8 @@ def main():
         print(" Seed: ", args.seed)
     else:
         print(" Seed NOT present")
+
+
 
     randomgraph_result = subprocess.run(["./randomgraph", str(args.n_start), str(args.m_start)],
                                         encoding='utf-8',
