@@ -42,7 +42,7 @@ def main():
 
         for m in range(m_s, m_e, 1):
             count += 1
-            filename = "{0}_{1}_{2}.out".format(args.output, n, m)
+            filename = "{0}_{1}_{2}.graph".format(args.output, n, m)
             filepath = os.path.join('outputs/', filename)
             print(" Count: {} ({}, {}) Filename: {}".format(count, n, m, filename))
 
