@@ -2,6 +2,8 @@ greedy
 random
 randomgraph
 sig
+*.graph
+*.greedy
 *.o
 *.out
 .idea/
