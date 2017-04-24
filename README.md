@@ -1,5 +1,6 @@
 # Graph Coloring Project
-[![Python Version](https://img.shields.io/badge/python-v3.6-blue.svg)](https://www.python.org/downloads/release/python-360)
+
+[![Python Version](https://img.shields.io/badge/python-v3.6-blue.svg)](https://www.python.org/downloads/release/python-360/)
 
 **The following would work on Linux and Mac.** <br/>
 *I don't know about Windows; give it a shot!*
