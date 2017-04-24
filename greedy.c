@@ -181,7 +181,7 @@ char *argv[];
                     printgraph();
 #endif
 		    double avecolor= ((double) colorcount) / (double)numnodes;
-                    printf("n  m  compares maxcolor  colorcount ave: \n");
+                    // printf("n  m  compares maxcolor  colorcount ave: \n");
 		    printf("%d %d    %d      %d       %d         %lf\n",
 			   numnodes, numedges,
 			   checkcount, maxcolor, colorcount, avecolor);
