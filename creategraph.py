@@ -13,6 +13,7 @@ def main():
     parser.add_argument("n_step", help="number of vertices to increment each iteration", type=int)
     parser.add_argument("-r", "--runs", help="number of times the entire program must be run", type=int)
     parser.add_argument("--verbose", help="show all output", action="store_true")
+    parser.add_argument("--limited", help="show all output", action="store_true")
     # parser.add_argument("m_start", help="number of initial edges", type=int)
     # # parser.add_argument("m_finish", help="number of final edges", type=int)
     # parser.add_argument("m_step", help="number of edges to increment each iteration", type=int)
@@ -60,6 +61,8 @@ def main():
                 filepath = os.path.join('outputs/', filename)
 
                 if args.verbose:
+                    print(" Count: {} ({}, {}) Filename: {}".format(count, n, m, filename))
+                elif args.limited and (count % 1000 == 0):
                     print(" Count: {} ({}, {}) Filename: {}".format(count, n, m, filename))
 
                 randomgraph_result = subprocess.run(["./randomgraph", str(n), str(m)],
