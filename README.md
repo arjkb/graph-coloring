@@ -46,7 +46,7 @@ make clean
 ```
 ---
 ### Python Script to Create Graphs
-**Requires [Python 3.6](https://www.python.org/downloads/release/python-360/)**
+**Requires [Python 3.6](https://www.python.org/downloads/)**
 
 1. `creategraph.py` generates graphs. <br/>Saves the graphs to `outputs/` with `.graph` extension.
 2. `run_greedy.py` to run the `greedy` algorithm on all graphs in `outputs/`.<br/>Saves the result to `outputs/` with `.greedy` extension.
