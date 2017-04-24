@@ -14,7 +14,7 @@ git clone https://github.com/arjunkrishnababu96/graph-coloring.git
 
 
 #### Branches
-**[`greedy_summary`](https://github.com/arjunkrishnababu96/graph-coloring/tree/greedy_summary)** <br/>
+[`greedy_summary`](https://github.com/arjunkrishnababu96/graph-coloring/tree/greedy_summary) <br/>
 Contains script to generate graphs between `n = 40` and `n = 60`, and 30% to 60% of max-edges for each of those `n`. <br/>
 To clone:
 ```
