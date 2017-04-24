@@ -4,3 +4,4 @@ randomgraph
 sig
 *.o
 *.out
+.idea/
