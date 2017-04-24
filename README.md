@@ -5,7 +5,7 @@
 
 For instructions about the project, see [Lab1.pdf](https://github.com/arjunkrishnababu96/graph-coloring/blob/master/Lab1.pdf).
 
-In addition to the original `.c` files, this repository contains a [`Makefile`](#makefile-usage), and a [`creategraph.py` python script.](#python-script-to-create-graphs) See below.
+In addition to the original `.c` files, this repository contains a [`Makefile`](#makefile-usage), and a couple of python scripts. See below.
 
 To get started, clone this repo:
 ```
@@ -37,13 +37,14 @@ make clean
 ### Python Script to Create Graphs
 **Requires [Python 3.6](https://www.python.org/downloads/release/python-360/)**
 
-`creategraph.py` automatically generates graphs based on parameters passed as input to it. It internally runs `randomgraph.c`.
+1. `creategraph.py` generates graphs. <br/>Saves the graphs to `outputs/` with `.graph` extension.
+2. `run_greedy.py` to run the `greedy` algorithm on all graphs in `outputs/`.<br/>Saves the result to `outputs/` with `.greedy` extension.
 
-To know more about its usage, see the documentation:
+To know about about the usage of the scripts, run:
 ```
-python creategraph.py --help
+python3 creategraph.py --help
+python3 run_greedy.py --help
+
 ```
 
-The documentation for `creategraph.py` is self-explanatory.
-
-All the graph files created using this script would be saved to `outputs/` directory.
+You may have to modify `creategraph.py` to generate the exact type of graphs you want. <br/> E-Mail me for help with this.
