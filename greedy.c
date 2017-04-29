@@ -1,10 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #define MAXNODES 100
-#define MAXEDGES 100*(100-1)/2
+#define MAXEDGES 100*(100-1)
 
 /* GREEDY    Graph coloring algorithm C.C. McGeoch 2011
-
    Usage: greedy filename
 
    To report counts:       #define REPORTSTATS  1
