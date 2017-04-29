@@ -12,7 +12,7 @@
 */
 // #define REPORTSTATS  1
 // #define REPORTCOLORS 1
-#define REPORYSUMMARY 1
+// #define REPORYSUMMARY 1
 
 int numnodes=0;    /* number of nodes in the graph */
 int numedges=0;
@@ -182,9 +182,9 @@ char *argv[];
 #endif
 		    double avecolor= ((double) colorcount) / (double)numnodes;
                     // printf("n  m  compares maxcolor  colorcount ave: \n");
-		    printf("%d %d    %d      %d       %d         %lf\n",
-			   numnodes, numedges,
-			   checkcount, maxcolor, colorcount, avecolor);
+		    // printf("%d %d    %d      %d       %d         %lf\n",
+			  //  numnodes, numedges,
+			  //  checkcount, maxcolor, colorcount, avecolor);
 
 #ifdef REPORTSTATS
 		    int i;
