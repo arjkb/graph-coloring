@@ -6,7 +6,7 @@
 #define FALSE 0
 #define MAXNODES	100
 #define MAXCOLORS 100		
-#define MAXEDGES 100*(100-1)/2	
+#define MAXEDGES 100*(100-1)	
 
 /* SIG Simplified Iterated Greedy graph coloring algorithm C.C. McGeoch 2011
 	 Usage: sig <filename 
