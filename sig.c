@@ -67,6 +67,16 @@ int checkcount = 0;
 /*-----------------------------------------------------------*/
 /* Utility functions																				 */
 
+/*print usage----------------------------------------------------*/
+void usage() {
+	printf("sig graph_file initpolicy [options]\n");
+	printf("--maxiter <int>			Max number of iterations, default 1000\n");
+	printf("--trials <int>			Max trials, default 100\n");
+	printf("--revert <int>			Max number of trials before revert, default 100\n");
+	printf("--target <int>			Expected number of colors, default 100\n");
+	printf("-h, --help			Print this message\n");
+}
+
 void parseinput(int argc, char** argv) {
 	fp = fopen(argv[1], "r");
 	if (NULL == fp){
@@ -89,6 +99,9 @@ void parseinput(int argc, char** argv) {
 		} else if (!strncmp("--target", argv[i], 8)) {
 			++i;
 			target = atoi(argv[i]);
+		} else if (!strncmp("-h", argv[i], 2) || !strncmp("--help", argv[i], 6)) {
+			usage();
+			exit(0);
 		} else {
 			printf("Unknown flag %s \n", argv[i]);
 			exit(1);
@@ -607,10 +620,6 @@ void sigcolor() {
 
 }//sigcolor
 
-/*print usage----------------------------------------------------*/
-void usage() {
-	printf("sig graph_file initpolicy\n");
-}
 
 /*--main---------------------------------------------------------*/ 
 int	main(int argc, char* argv[])
