@@ -22,6 +22,13 @@ To clone:
 ```
 git clone -b greedy_summary https://github.com/arjunkrishnababu96/graph-coloring.git
 ```
+<br /><br/>
+[`greedy_summary_runtimes`](https://github.com/arjunkrishnababu96/graph-coloring/tree/greedy_summary_runtimes) <br/>
+Contains script to generate 100 graphs with `n = 100` and `m = 1238`, and additional script to find the runtimes of `greedy` with those graphs. <br/>
+To clone:
+```
+git clone -b greedy_summary_runtimes https://github.com/arjunkrishnababu96/graph-coloring.git
+```
 ---
 ### Makefile Usage
 A `Makefile` is included to compile the `.c` files. To compile `greedy.c` for instance, run:
