@@ -563,35 +563,37 @@ result is array cperm[1..numcolors] (just the front): cperm[i] names the ith col
 /*---initialcoloring()--------------------------------------------------*/ 
 void initialcoloring() 
  {
-	 int v,i,r, c, tmp; 
-	 for (i = 1; i<= numnodes; i++)	vperm[i] = i;	 //initialize vertex permutation
-	 for (i = 1; i<= numcolors; i++) cperm[i] = i;	 //initialize	color permutation 
+ 	int v,i,r, c, tmp; 
+	for (i = 1; i<= numnodes; i++)	vperm[i] = i;	 //initialize vertex permutation
+	for (i = 1; i<= numcolors; i++) cperm[i] = i;	 //initialize	color permutation 
 
-	 switch (initpolicy) {
-	 case 1:	// n distinct colors 
-		 for (v=1; v<=numnodes; v++) {
-			 colorof[v] = v;	
-			 colorcount[v]=1; 
-			 curcolorscore += v;
-		 }
-		 curcolors=numnodes; 
-		 curcolorscore += curcolors * numnodes;	
-		 numcolors=curcolors; 
-		 break; 
+	switch (initpolicy) {
+		case 1:	// n distinct colors 
+			for (v=1; v<=numnodes; v++) {
+				colorof[v] = v;	
+				colorcount[v]=1; 
+				curcolorscore += v;
+	 		}
+			curcolors=numnodes; 
+			curcolorscore += curcolors * numnodes;	
+			numcolors=curcolors; 
+			break; 
 	
-	 case 2: // greedy with random vertex order, color order increasing	
-		 for (i = numnodes;	i >= 2; i--){
-			 r =	(int) (drand48() * i) +1 ; //1..i inclusive 
-			 tmp= vperm[i];
-			 vperm[i] = vperm[r];
-			 vperm[r]=tmp;
-		 }
-		 for (v=1; v<= numnodes; v++) {
-			 colorof[v] = 0;	//initialize vertices to not colored 
-		 }
-		 greedycolorgraph(); 
-		 break; 
-	
+		case 2: // greedy with random vertex order, color order increasing	
+			for (i = numnodes;	i >= 2; i--){
+				r =	(int) (drand48() * i) +1 ; //1..i inclusive 
+				tmp= vperm[i];
+				vperm[i] = vperm[r];
+				vperm[r]=tmp;
+			}
+			for (v=1; v<= numnodes; v++) {
+				colorof[v] = 0;	//initialize vertices to not colored 
+			}
+			greedycolorgraph(); 
+			break; 
+		case 3: //greedy fixed vertex order
+			greedycolorgraph();
+			break;
 	 }//switch	
 
 }//initialcoloring 
