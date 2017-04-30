@@ -17,11 +17,6 @@ def main():
 
     count = 0
 
-    if args.runs:
-        total_time = args.runs
-    else:
-        total_time = 1
-
     for graph_file in graph_files:
         count += 1
         graph_filename = os.path.join(args.directory, graph_file)
