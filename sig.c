@@ -140,15 +140,6 @@ void parseinput(int argc, char** argv) {
 			exit(1);
 		}
 	}
-	
-	for(int x = 0; x < 6; ++x) {
-		printf("%f", ccutoffs[x]);
-	}
-
-	for(int x = 0; x < 4; ++x) {
-		printf("%f", vcutoffs[x]);
-	}
-
 }
 
 /*---printcolors---------------------------------------------*/ 
