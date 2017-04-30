@@ -39,7 +39,8 @@ def main():
     ax.set_ylabel('Density')
     ax.set_xlabel('Runtime')
     ax.set_title(r'Histogram of Run times'+'\n$\mu='+str(mu)+'$'+
-                 '\n$\sigma='+str(sigma)+'$');
+                 '\n$\sigma='+str(sigma)+'$'+
+                 '\n$\sigma^2='+str(var)+'$');
 
     print('Report Statistics:\nMean: '+str(mu)+
           '\nStandard Deviation: '+str(sigma)+
