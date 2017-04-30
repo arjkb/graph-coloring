@@ -57,8 +57,8 @@ int maxiter = 1000;
 int trials = 100;
 int revert = 100;
 int target = 100;
-float ccutoffs[] = {.166, .166, .166, .166, .166, .17}; /* ccutoffs is a 1 by 6 normalized probability vector */
-float vcutoffs[] = {.25, .25, .25, .25}; 				/* vcutoffs is a 1 by 4 normalized probability vector */
+float ccutoffs[6]; /* ccutoffs is a 1 by 6 normalized probability vector */
+float vcutoffs[4]; 				/* vcutoffs is a 1 by 4 normalized probability vector */
 /*-------------------------------------------------------*/
 /* algorithm statistics																	*/ 
 
@@ -74,6 +74,8 @@ void usage() {
 	printf("--trials <int>			Max trials, default 100\n");
 	printf("--revert <int>			Max number of trials before revert, default 100\n");
 	printf("--target <int>			Expected number of colors, default 100\n");
+	printf("--vweight <int> <int> <int> <int>\n");
+	printf("--cweight <int> <int> <int> <int> <int> <int>\n");
 	printf("-h, --help			Print this message\n");
 }
 
@@ -84,6 +86,14 @@ void parseinput(int argc, char** argv) {
 		exit(1);
 	}
 	initpolicy = atoi(argv[2]);
+
+	for(int x = 0; x < 6; ++x) {
+		ccutoffs[x] = 1.0/6.0;
+	}
+
+	for(int x = 0; x < 4; ++x) {
+		vcutoffs[x] = 1.0/4.0;
+	}
 
 	/*parse flags*/
 	for(int i = 3; i < argc; ++i) {
@@ -102,11 +112,43 @@ void parseinput(int argc, char** argv) {
 		} else if (!strncmp("-h", argv[i], 2) || !strncmp("--help", argv[i], 6)) {
 			usage();
 			exit(0);
+		} else if (!strncmp("--cweight", argv[i], 9)) {
+			++i;
+			ccutoffs[0] = atof(argv[i]);
+			++i;
+			ccutoffs[1] = atof(argv[i]);
+			++i;
+			ccutoffs[2] = atof(argv[i]);
+			++i;
+			ccutoffs[3] = atof(argv[i]);
+			++i;
+			ccutoffs[4] = atof(argv[i]);
+			++i;
+			ccutoffs[5] = atof(argv[i]);
+		} else if (!strncmp("--vweight", argv[i], 9)) {
+			++i;
+			vcutoffs[0] = atof(argv[i]);
+			++i;
+			vcutoffs[1] = atof(argv[i]);
+			++i;
+			vcutoffs[2] = atof(argv[i]);
+			++i;
+			vcutoffs[3] = atof(argv[i]);
+
 		} else {
 			printf("Unknown flag %s \n", argv[i]);
 			exit(1);
 		}
 	}
+	
+	for(int x = 0; x < 6; ++x) {
+		printf("%f", ccutoffs[x]);
+	}
+
+	for(int x = 0; x < 4; ++x) {
+		printf("%f", vcutoffs[x]);
+	}
+
 }
 
 /*---printcolors---------------------------------------------*/ 
