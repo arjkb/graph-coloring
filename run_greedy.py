@@ -2,6 +2,8 @@ import os
 import subprocess
 import argparse
 
+from datetime import datetime
+
 
 def is_graph_file(filename):
     return filename.endswith(".graph")
@@ -33,9 +35,13 @@ def main():
         count += 1
         graph_filename = os.path.join('outputs/', graph_file)
 
+        starttime = datetime.now()
         greedy_result = subprocess.run(["./greedy", graph_filename],
                                             encoding='utf-8',
                                             stdout=subprocess.PIPE)
+        endtime = datetime.now()
+        total_time = (endtime - starttime).total_seconds()
+        print(total_time)
 
         if args.verbose:
             print(" Runcount {}: ./greedy {} >> {}"
