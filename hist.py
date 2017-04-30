@@ -27,25 +27,24 @@ def main():
     fig, ax = plt.subplots()
 
     #this is the histogram
-    n, bins, patches = ax.hist(runtimes, nbins, normed=1)
-    
+    n, bins, patches = ax.hist(runtimes, nbins)
+
 
     #get mean
     mu = np.mean(runtimes)
     sigma = np.std(runtimes, ddof=1)
     var = np.var(runtimes, ddof=1)
 
-    print('Report Statistics:\nMean: '+str(mu)+
-          '\nStandard Deviation: '+str(sigma)+
-          '\nVariance: '+str(var));
-    
     #add a 'best fit' line
-    y = mlab.normpdf(bins, mu, sigma)
-    ax.plot(bins, y, '--')
     ax.set_ylabel('Density')
     ax.set_xlabel('Runtime')
     ax.set_title(r'Histogram of Run times'+'\n$\mu='+str(mu)+'$'+
                  '\n$\sigma='+str(sigma)+'$');
+
+    print('Report Statistics:\nMean: '+str(mu)+
+          '\nStandard Deviation: '+str(sigma)+
+          '\nVariance: '+str(var));
+    
 
 
     fig.tight_layout()
