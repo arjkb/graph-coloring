@@ -17,13 +17,15 @@ def main():
     parser.add_argument("-r", "--runs", help="number of times the entire program must be run", type=int)    
     args = parser.parse_args()
 
+    OUTPUT_DIRECTORY = 'output_1gr_100runs'
+
     # grab the graph files -- the ones with .graph extension
-    graph_files = filter(is_graph_file, sorted(os.listdir('outputs/')) )
-
-    op_filename = args.filename + ".greedy"
-    op_filepath = os.path.join('outputs/', op_filename)
+    # graph_files = filter(is_graph_file, sorted(os.listdir('outputs/')) )
 
 
+
+    op_filename = args.filename + ".times"
+    op_filepath = os.path.join(OUTPUT_DIRECTORY, op_filename)
 
     if args.runs:
         total_runs = args.runs
@@ -33,7 +35,7 @@ def main():
     count = 0
     for graph_file in graph_files:
         count += 1
-        graph_filename = os.path.join('outputs/', graph_file)
+        graph_filename = os.path.join(OUTPUT_DIRECTORY, graph_file)
 
         starttime = datetime.now()
         greedy_result = subprocess.run(["./greedy", graph_filename],
