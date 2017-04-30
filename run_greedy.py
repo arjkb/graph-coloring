@@ -21,7 +21,8 @@ def main():
 
     # grab the graph files -- the ones with .graph extension
     # graph_files = filter(is_graph_file, sorted(os.listdir('outputs/')) )
-
+    graph_files = filter(is_graph_file, sorted(os.listdir(OUTPUT_DIRECTORY)))
+    # print(os.listdir(OUTPUT_DIRECTORY))
 
 
     op_filename = args.filename + ".times"
@@ -34,27 +35,29 @@ def main():
 
     count = 0
     for graph_file in graph_files:
+        # print(" Read graph file: {}".format(graph_file))
         count += 1
         graph_filename = os.path.join(OUTPUT_DIRECTORY, graph_file)
 
-        starttime = datetime.now()
-        greedy_result = subprocess.run(["./greedy", graph_filename],
-                                            encoding='utf-8',
-                                            stdout=subprocess.PIPE)
-        endtime = datetime.now()
-        total_time = (endtime - starttime).total_seconds()
-        print(total_time)
+        for run_count in range(total_runs):
+            starttime = datetime.now()
+            greedy_result = subprocess.run(["./greedy", graph_filename],
+                                                encoding='utf-8',
+                                                stdout=subprocess.PIPE)
+            endtime = datetime.now()
+            total_time = (endtime - starttime).total_seconds()
+            print(total_time)
 
-        if args.verbose:
-            print(" Runcount {}: ./greedy {} >> {}"
-                            .format(count, graph_file, op_filename))
-        elif args.limited:
-            if (count % 1000) == 0:
-                print(" Running count {}: ./greedy {} >> {}"
-                      .format(count, graph_file, op_filename))
+            # if args.verbose:
+            #     print(" Runcount {}: ./greedy {} >> {}"
+            #                     .format(count, graph_file, op_filename))
+            # elif args.limited:
+            #     if (count % 1000) == 0:
+            #         print(" Running count {}: ./greedy {} >> {}"
+            #               .format(count, graph_file, op_filename))
 
-        with open(op_filepath, mode='a', encoding='utf-8') as output_file:
-            output_file.write(greedy_result.stdout)
+        # with open(op_filepath, mode='a', encoding='utf-8') as output_file:
+        #     output_file.write(greedy_result.stdout)
 
 
 if __name__ == '__main__':
