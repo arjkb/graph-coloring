@@ -4,6 +4,10 @@ import os
 
 import math
 
+def write_to_file(filepath, content):
+    with open(filepath, mode='w', encoding='utf-8') as output_file:
+        output_file.write(content)
+
 
 def main():
     parser = argparse.ArgumentParser()
@@ -60,9 +64,11 @@ def main():
                                                     encoding='utf-8',
                                                     stdout=subprocess.PIPE)
 
-                with open(filepath, mode='w', encoding='utf-8') as output_file:
-                    output_file.write(randomgraph_result.stdout)
-                    randomgraph_result = None
+                write_to_file(filepath, randomgraph_result.stdout)
+
+                # with open(filepath, mode='w', encoding='utf-8') as output_file:
+                #     output_file.write(randomgraph_result.stdout)
+                #     randomgraph_result = None
                 if m_count == 10:
                     break
 
