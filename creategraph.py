@@ -78,6 +78,8 @@ def main():
                 write_to_file(filepath, randomgraph_result.stdout)
                 if m_count == 10:
                     break
+
+    # print some statistics at the end
     print("\n Created {} sets of {} graphs in {}/ directory"
                                     .format(total_runs,
                                             count/total_runs,
