@@ -2,8 +2,6 @@ import argparse
 import subprocess
 import os
 
-import math
-
 
 def write_to_file(filepath, content):
     with open(filepath, mode='w', encoding='utf-8') as output_file:
