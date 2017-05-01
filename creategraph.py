@@ -19,6 +19,10 @@ def run_c_program(program_params_list):
     return subprocess.run(program_params_list, encoding='utf-8', stdout=subprocess.PIPE)
 
 
+def generate_filename(prefix, n, m):
+    return "{}_n{}_m{}.graph".format(prefix, n, m)
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("output_dir", help="directory to output files to", type=str)
@@ -55,11 +59,11 @@ def main():
             m_count = 0
             for m in range(m_start, m_end + 1, m_10perc):
                 count, m_count = count + 1, m_count + 1
-                filename = "{0}_n{1}_m{2}.graph".format(filename_prefix, n, m)
-                filepath = os.path.join(args.output_dir, filename)
+
+                filepath = os.path.join(args.output_dir, generate_filename(filename_prefix, n, m))
 
                 if args.verbose:
-                    print(" Count: {} ({}, {}) Filename: {}".format(count, n, m, filename))
+                    print(" Count: {} ({}, {}) Filename: {}".format(count, n, m, filepath))
 
                 randomgraph_result = run_c_program(["./randomgraph", str(n), str(m), str(count)])
                 write_to_file(filepath, randomgraph_result.stdout)
