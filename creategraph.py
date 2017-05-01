@@ -4,10 +4,17 @@ import os
 
 import math
 
+
 def write_to_file(filepath, content):
     with open(filepath, mode='w', encoding='utf-8') as output_file:
         output_file.write(content)
 
+
+def get_total_runs(runs_argument):
+    if runs_argument:
+        return runs_argument
+    else:
+        return 1
 
 def main():
     parser = argparse.ArgumentParser()
@@ -28,11 +35,13 @@ def main():
     print(" N step: ", args.n_step)
     print(" Creating graphs...")
 
-    total_runs = 1
-    if args.runs:
-        total_runs = args.runs
-    else:
-        total_runs = 1
+    # total_runs = 1
+    # if args.runs:
+    #     total_runs = args.runs
+    # else:
+    #     total_runs = 1
+
+    total_runs = get_total_runs(args.runs)
 
     count = 0
     for run_count in range(total_runs):
