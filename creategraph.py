@@ -23,6 +23,10 @@ def generate_filename(prefix, n, m):
     return "{}_n{}_m{}.graph".format(prefix, n, m)
 
 
+def get_max_edges(n):
+    return int(n*(n-1)/2)
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("output_dir", help="directory to output files to", type=str)
@@ -48,7 +52,7 @@ def main():
         filename_prefix = args.output + str(run_count)
 
         for n in range(args.n_start, args.n_finish + 1, args.n_step):
-            m_max = int(n*(n-1)/2)
+            m_max = get_max_edges(n)
             m_start = int(0.10 * m_max)
             m_10perc = int(0.10 * m_max)
 
