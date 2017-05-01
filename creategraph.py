@@ -16,6 +16,11 @@ def get_total_runs(runs_argument):
     else:
         return 1
 
+
+def run_c_program(program_params_list):
+    return subprocess.run(program_params_list, encoding='utf-8', stdout=subprocess.PIPE)
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("output_dir", help="directory to output files to", type=str)
@@ -63,15 +68,8 @@ def main():
                 elif args.limited and (count % 1000 == 0):
                     print(" Count: {} ({}, {}) Filename: {}".format(count, n, m, filename))
 
-                randomgraph_result = subprocess.run(["./randomgraph", str(n), str(m), str(count)],
-                                                    encoding='utf-8',
-                                                    stdout=subprocess.PIPE)
-
+                randomgraph_result = run_c_program(["./randomgraph", str(n), str(m), str(count)])
                 write_to_file(filepath, randomgraph_result.stdout)
-
-                # with open(filepath, mode='w', encoding='utf-8') as output_file:
-                #     output_file.write(randomgraph_result.stdout)
-                #     randomgraph_result = None
                 if m_count == 10:
                     break
 
