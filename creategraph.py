@@ -12,6 +12,7 @@ def main():
     parser.add_argument("n_start", help="number of initial vertices", type=int)
     parser.add_argument("n_finish", help="number of final vertices", type=int)
     parser.add_argument("n_step", help="number of vertices to increment each iteration", type=int)
+    parser.add_argument("-r", "--runs", help="number of total iterations of the graph generation", type=int)
     parser.add_argument("--verbose", help="show all output", action="store_true")
     parser.add_argument("--limited", help="show all output", action="store_true")
 
