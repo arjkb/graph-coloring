@@ -30,7 +30,6 @@ def main():
     parser.add_argument("n_step", help="number of vertices to increment each iteration", type=int)
     parser.add_argument("-r", "--runs", help="number of total iterations of the graph generation", type=int)
     parser.add_argument("--verbose", help="show all output", action="store_true")
-    parser.add_argument("--limited", help="show all output", action="store_true")
     args = parser.parse_args()
 
     total_runs = get_total_runs(args.runs)
@@ -64,8 +63,6 @@ def main():
                 filepath = os.path.join(args.output_dir, filename)
 
                 if args.verbose:
-                    print(" Count: {} ({}, {}) Filename: {}".format(count, n, m, filename))
-                elif args.limited and (count % 1000 == 0):
                     print(" Count: {} ({}, {}) Filename: {}".format(count, n, m, filename))
 
                 randomgraph_result = run_c_program(["./randomgraph", str(n), str(m), str(count)])
