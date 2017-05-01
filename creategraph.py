@@ -26,22 +26,16 @@ def main():
     parser.add_argument("-r", "--runs", help="number of total iterations of the graph generation", type=int)
     parser.add_argument("--verbose", help="show all output", action="store_true")
     parser.add_argument("--limited", help="show all output", action="store_true")
-
     args = parser.parse_args()
+
+    total_runs = get_total_runs(args.runs)
 
     print(" Output file prefix: ", args.output)
     print(" N start: ", args.n_start)
     print(" N finish: ", args.n_finish)
     print(" N step: ", args.n_step)
+    print(" Total runs: ", total_runs)
     print(" Creating graphs...")
-
-    # total_runs = 1
-    # if args.runs:
-    #     total_runs = args.runs
-    # else:
-    #     total_runs = 1
-
-    total_runs = get_total_runs(args.runs)
 
     count = 0
     for run_count in range(total_runs):
