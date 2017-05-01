@@ -54,9 +54,7 @@ def main():
 
             m_count = 0
             for m in range(m_start, m_end + 1, m_10perc):
-                count += 1
-                m_count += 1
-
+                count, m_count = count + 1, m_count + 1
                 filename = "{0}_n{1}_m{2}.graph".format(filename_prefix, n, m)
                 filepath = os.path.join(args.output_dir, filename)
 
