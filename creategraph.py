@@ -59,18 +59,25 @@ def main():
             for m in range(m_start, m_max + 1, m_10perc):
                 count, m_count = count + 1, m_count + 1
 
-                filepath = os.path.join(args.output_dir, generate_filename(filename_prefix, n, m))
+                filepath = os.path.join(args.output_dir,
+                                        generate_filename(filename_prefix, n, m))
 
                 if args.verbose:
-                    print(" Count: {} ({}, {}) Filename: {}".format(count, n, m, filepath))
+                    print(" Count: {} ({}, {}) Filename: {}"
+                          .format(count, n, m, filepath))
 
-                randomgraph_result = run_c_program(["./randomgraph", str(n), str(m), str(count)])
+                randomgraph_result = run_c_program(["./randomgraph",
+                                                    str(n),
+                                                    str(m),
+                                                    str(count)])
+
                 write_to_file(filepath, randomgraph_result.stdout)
                 if m_count == 10:
                     break
-
     print("\n Created {} sets of {} graphs in {}/ directory"
-                                    .format(total_runs, count/total_runs, args.output_dir))
+                                    .format(total_runs,
+                                            count/total_runs,
+                                            args.output_dir))
     print(" Total number of graphs: {}".format(count))
     print()
 
