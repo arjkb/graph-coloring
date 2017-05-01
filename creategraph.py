@@ -51,13 +51,12 @@ def main():
             m_max = int(n*(n-1)/2)
             m_start = int(0.10 * m_max)
             m_10perc = int(0.10 * m_max)
-            m_end = int(1.00 * m_max)
 
             if args.verbose:
-                print(" For n = {}, m_start={}, m_end={}".format(n, m_start, m_end))
+                print(" For n = {}, m_start={}, m_end={}".format(n, m_start, m_max))
 
             m_count = 0
-            for m in range(m_start, m_end + 1, m_10perc):
+            for m in range(m_start, m_max + 1, m_10perc):
                 count, m_count = count + 1, m_count + 1
 
                 filepath = os.path.join(args.output_dir, generate_filename(filename_prefix, n, m))
