@@ -9,9 +9,9 @@
    To report counts:       #define REPORTSTATS  1
    To report the coloring: #define REPORTCOLORS 1
 */
-// #define REPORTSTATS  1
-// #define REPORTCOLORS 1
-// #define REPORYSUMMARY 1
+#define REPORTSTATS  1
+#define REPORTCOLORS 1
+#define REPORYSUMMARY 1
 
 int numnodes=0;    /* number of nodes in the graph */
 int numedges=0;
@@ -191,8 +191,13 @@ char *argv[];
 		    for (i=1; i <= numnodes; i++) {
 		      printf("%d %d \t", i, colorcounts[i]);
 		      if (i % 10 == 0) printf("\n");
-		      if (colorcounts[i]==0) break;
+		      if (colorcounts[i]==0){
+		        break;
+		      }
 		    }
+            --i;
+	        printf("\n%d colors were assigned\n", i);
+
 #endif
 		  }  /* end else */
 	} /* end else */
