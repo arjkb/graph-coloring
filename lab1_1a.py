@@ -6,11 +6,9 @@ import json
 
 def run_greedy_100_times():
     trials = {}
-    data = {}
-
     for i in range(100):
+        data = {}
         for filename in os.listdir('graphs_to_test'):
-            colors = ''
             path = 'graphs_to_test/' + filename.strip()
             start_time = datetime.now()
             subprocess.run(["./greedy " + path + " > " +
@@ -30,13 +28,12 @@ def run_greedy_100_times():
 
 def run_random_100_times(iterations):
     iter_data = {}
-    trials = {}
-    data = {}
 
     for iteration in range(iterations):
+        trials = {}
         for i in range(100):
+            data = {}
             for filename in os.listdir('graphs_to_test'):
-                colors = ''
                 path = 'graphs_to_test/' + filename.strip()
                 start_time = datetime.now()
                 subprocess.run(["./random " + path + ' ' + str(2**iteration) + " > " +
@@ -53,4 +50,6 @@ def run_random_100_times(iterations):
         with open('lab1_1a_random_results.json', 'w') as out_file:
             json.dump(iter_data, out_file)
 
+
 run_random_100_times(7)
+run_greedy_100_times()
