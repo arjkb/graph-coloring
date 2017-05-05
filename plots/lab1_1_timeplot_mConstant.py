@@ -36,5 +36,5 @@ plt.suptitle('Runtime average')
 plt.xlabel('n')
 plt.ylabel('Runtime')
 plt.legend(loc=2)
-plt.show();
+plt.show()
 
