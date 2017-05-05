@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #define MAXNODES 100
-#define MAXEDGES 100*(100-1)/2  
+#define MAXEDGES 100*(100-1)
 
 
 /* RANDOM Random Graph coloring algorithm C.C. McGeoch 2011 
@@ -288,9 +288,12 @@ char *argv[];
   for (i=1; i <= numnodes; i++) {
     printf("%d %d \t", i, colordist[i]);
     if (i % 10 == 0) printf("\n");
-    if (colordist[i]==0) break;
+    if (colordist[i]==0){
+	--i;
+        break;
+    }
   }
-      
+printf("\n%d colors were assigned by random\n", i);
 #endif
 
 } /* end main */ 
