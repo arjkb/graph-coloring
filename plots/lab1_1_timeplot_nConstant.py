@@ -17,7 +17,7 @@ for x in range (0, 100):
     iter = trials[x].split(" ")
     nodes = int(iter[0]);
     index = (nodes/10) - 1
-    time[index].append(float(iter[3]))
+    time[index].append((float(iter[3]))*1000)
     m[index].append(float(iter[1])/((nodes*(nodes-1))/2) *100)
 
 
