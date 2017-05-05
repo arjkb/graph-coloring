@@ -18,7 +18,7 @@ for x in range (0, 100):
     nodes = int(iter[0])
     edges = int((float(iter[1]))/(float((nodes*(nodes-1))/2)) *100);
     index = (edges/10) - 1
-    time[index].append(float(iter[3]))
+    time[index].append((float(iter[3]))*1000)
     n[index].append(int(iter[0]))
 
 cm = plt.get_cmap('gist_rainbow')
