@@ -70,7 +70,7 @@ def main():
         del file_averages[:]
 
     for category in category_averages.keys():
-        print(category_averages[category])
+        print(category, category_averages[category])
 
 
 if __name__ == '__main__':
