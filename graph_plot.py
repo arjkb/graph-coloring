@@ -3,6 +3,11 @@ import os
 
 import matplotlib.pyplot as plt
 
+
+def get_output_filename(inp_fname):
+    return inp_fname.replace('output', 'graph.png')
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("inp_file", help="input file whose data should be plotted", type=str)
@@ -28,7 +33,8 @@ def main():
     plt.ylabel('runtime (millisecond)')
     fig = plt.gcf()
     plt.show()
-    fig.savefig('{}.png'.format(args.inp_file), dpi=100)
+    # fig.savefig('{}.png'.format(args.inp_file), dpi=100)
+    fig.savefig(get_output_filename(args.inp_file))
 
 if __name__ == '__main__':
     main()
