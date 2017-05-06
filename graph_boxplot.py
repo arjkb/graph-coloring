@@ -34,11 +34,22 @@ def main():
     with open(args.inp_file, mode='r', encoding='utf-8') as json_file:
         data = json.load(json_file)
 
+    data_to_plot = list()
     for k in data.keys():
         print(k)
-        for v in data[k]:
-            print(v)
-            
+        data_to_plot.append(data[k])
+
+    # for a in data_to_plot:
+    #     print(a)
+    #     print()
+
+    # fig = plt.figure(1)
+    # ax = fig.add_subplot(111)
+    # bp = ax.boxplot(data_to_plot)
+    # plt.show()
+    plt.boxplot(data_to_plot)
+    plt.show()
+
     # with open(args.inp_file, mode='r', encoding='utf-8') as input_file:
     #     file_content = input_file.readlines()
 
