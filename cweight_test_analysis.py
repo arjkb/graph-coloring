@@ -28,14 +28,19 @@ def main():
     count = 0
     new_pattern = ""
     current_pattern = ""
+    cweights_file_categories = list()
     for gr_file_name in gr_files_list:
         m = re.search(pattern, gr_file_name)
         if m is not None:
             new_pattern = m.group(0)
             if new_pattern != current_pattern:
+                cweights_file_categories.append(new_pattern)
                 current_pattern = new_pattern
-                print(current_pattern)
-                
+                # print(current_pattern)
+
+    for cat in cweights_file_categories:
+        print(cat)
+
         # print(gr_file_name)
 
 
