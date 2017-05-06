@@ -19,7 +19,7 @@ time = [[] for y in range(len(n))]
 i = [[] for y in range(len(n))]
 
 
-for x in range (0, 1200):
+for x in range (0, 100):
     iter = trials[x].split(" ")
     nodes = int(iter[0]);
     index = (nodes/10) - 1
