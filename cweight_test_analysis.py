@@ -17,7 +17,7 @@ def main():
     parser.add_argument("out_dir", help="output directory", type=str)
     args = parser.parse_args()
 
-    pattern = '^sig_cweights_\d\.\d+_\d\.\d+_\d\.\d+_\d\.\d+_\d\.\d+_\d\.\d+_'
+    pattern = '^sig_cweights_\d\.\d+_\d\.\d+_\d\.\d+_\d\.\d+_\d\.\d+_\d\.\d+'
 
     print(" Input directory: ", args.inp_dir)
     print(" Output directory: ", args.out_dir)
@@ -25,13 +25,27 @@ def main():
     gr_files_list = filter(is_graph_file, sorted(os.listdir(args.inp_dir)))
 
 
+    count = 0
+    new_pattern = ""
+    current_pattern = ""
     for gr_file_name in gr_files_list:
         m = re.search(pattern, gr_file_name)
         if m is not None:
-            current_pattern = m.group(0)
-            print(current_pattern)
+            new_pattern = m.group(0)
+            if new_pattern != current_pattern:
+                current_pattern = new_pattern
+                print(current_pattern)
+                
         # print(gr_file_name)
-        pass
+
+
+
+        # if m is not None:
+        #     current_pattern = m.group(0)
+        #     print(current_pattern)
+        # print(gr_file_name)
+        # count += 1
+        # print(count)
 
     # for gr_file_name in gr_files_list:
     #     gr_file_path = os.path.join(args.inp_dir, gr_file_name)
