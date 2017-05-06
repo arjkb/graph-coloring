@@ -2,6 +2,7 @@ import argparse
 import os
 import re
 import itertools
+import json
 
 import numpy
 
@@ -19,6 +20,9 @@ def get_file_average(filename):
         average_runtime = numpy.average(runtimes)
     return average_runtime
 
+def get_json_name(filename):
+    fname = '{}_results.json'.format(filename)
+    return fname
 
 is_graph_file = lambda filename: filename.endswith('.graph')
 
@@ -44,6 +48,7 @@ def main():
 
     categorized_files = dict()
     category_averages = dict()
+    cat_av = dict()
     for gr_file_name in gr_files_list_it1:
         m = re.search(pattern, gr_file_name)
         if m is not None:
@@ -55,20 +60,26 @@ def main():
             if new_pattern not in categorized_files:
                 categorized_files[new_pattern] = list()
                 category_averages[new_pattern] = 0
+                cat_av[new_pattern] = list()
             categorized_files[new_pattern].append(gr_file_name)
 
     for k in categorized_files.keys():
-        # print(" CATEGORY :", k)
+        print(" CATEGORY :", k)
         i = 0
         file_averages = list()
         for v in categorized_files[k]:
             # print(v)
             fname = os.path.join(args.inp_dir, v)
             i += 1
-            # print(i, get_file_average(fname))
+            print(i, get_file_average(fname))
             file_averages.append(get_file_average(fname))
         category_averages[k] = numpy.average(file_averages)
+        # print(file_averages)
+        cat_av[k] = list(file_averages)
         del file_averages[:]
+
+    with open(get_json_name(args.inp_dir[7:]), mode='w', encoding='utf-8') as f:
+        json.dump(cat_av, f)
 
     for category in category_averages.keys():
         print(category, category_averages[category])
