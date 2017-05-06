@@ -14,7 +14,6 @@ def get_file_average(filename):
     with open(filename, mode='r', encoding='utf-8') as file:
         lines = file.readlines()
         runtimes = list()
-        print("Opening!")
         for line in lines:
             runtimes.append(float(line.strip().split(',')[0]))
         average_runtime = numpy.average(runtimes)
@@ -52,6 +51,7 @@ def main():
     cweights_file_categories = list()
 
     categorized_files = dict()
+    category_averages = dict()
     for gr_file_name in gr_files_list_it1:
         m = re.search(pattern, gr_file_name)
         if m is not None:
@@ -62,14 +62,24 @@ def main():
 
             if new_pattern not in categorized_files:
                 categorized_files[new_pattern] = list()
-
+                category_averages[new_pattern] = 0
             categorized_files[new_pattern].append(gr_file_name)
+
 
     for k in categorized_files.keys():
         print(" CATEGORY :", k)
-
+        i = 0
+        file_averages = list()
         for v in categorized_files[k]:
-            print(v)
+            fname = os.path.join(args.inp_dir, v)
+            i += 1
+            # print(i, get_file_average(fname))
+            file_averages.append(get_file_average(fname))
+        category_averages[k] = numpy.average(file_averages)
+        del file_averages[:]
+
+    for category in category_averages.keys():
+        print(category_averages[category])
 
 
 if __name__ == '__main__':
