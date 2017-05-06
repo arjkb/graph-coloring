@@ -17,7 +17,7 @@ for x in range (0, 100):
     iter = trials[x].split(" ")
     nodes = int(iter[0]);
     index = (nodes/10) - 1
-    time[index].append((float(iter[3]))*1000)
+    time[index].append((float(iter[3])))
     m[index].append(float(iter[1])/((nodes*(nodes-1))/2) *100)
 
 
@@ -29,13 +29,13 @@ ax.set_color_cycle([cm(1.*i/NUM_COLORS) for i in range(NUM_COLORS)])
 ax.set_xlim(10,100)
     
 for x in range (0, 10):
-    #plt.scatter(m[x], time[x])
+    plt.scatter(m[x], time[x], color=(cm(1.*x/NUM_COLORS)))
     ax.plot(np.unique(m[x]), np.poly1d(np.polyfit(m[x], time[x], 1))(np.unique(m[x])), label = "n="+str((x+1)*10))
 
 
 plt.suptitle('Runtime average')
 plt.xlabel('m % of maximum edges')
-plt.ylabel('Runtime')
+plt.ylabel('Runtime in Milliseconds')
 plt.legend(loc=2)
 plt.show();
 
