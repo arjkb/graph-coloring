@@ -4,9 +4,9 @@ import re
 with open('lab1_1a_random_results.json') as data_file:    
     data = json.load(data_file)
 
-results = [[[0 for i in range(7)] for x in range(100)] for y in range(100)]
+results = [[[0 for i in range(12)] for x in range(100)] for y in range(100)]
 
-for i in range(0,7):
+for i in range(0,12):
     iteration = data["iteration_"+str(i)] 
     
     for x in range (0, 100):
@@ -21,7 +21,7 @@ for i in range(0,7):
             time = float(iter[graphstring]['time'])
             results[x][y][i] = str(n)+ " "+str(m) +" "+ str(colors)+ " "+ str(time) + " "+ str(i)
 
-for i in range (0,7):
+for i in range (0,12):
     for x in range (0,100):
         c= []
         t = []

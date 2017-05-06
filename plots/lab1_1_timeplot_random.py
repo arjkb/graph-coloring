@@ -5,13 +5,19 @@ import matplotlib.pyplot as plt
 
 NUM_COLORS = 10
 
-with open("lab1_1_summary_stats.txt") as input_file:
+with open("lab1_1_random_summary_stats.txt") as input_file:
     trials = input_file.read().splitlines()
 
 i = 0;
 
-time = [[] for y in range(100)]
-m = [[] for y in range(100)]
+n = [10, 10, 50, 100, 100]
+m = [4, 45, 612, 495, 4950]
+
+
+
+time = [[] for y in range(len(n))]
+i = [[] for y in range(len(n))]
+
 
 for x in range (0, 100):
     iter = trials[x].split(" ")
@@ -38,4 +44,3 @@ plt.xlabel('m % of maximum edges')
 plt.ylabel('Runtime in Milliseconds')
 plt.legend(loc=2)
 plt.show();
-
