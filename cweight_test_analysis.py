@@ -26,24 +26,16 @@ is_graph_file = lambda filename: filename.endswith('.graph')
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("inp_dir", help="graph file directory to process", type=str)
-    parser.add_argument("out_dir", help="output directory", type=str)
+    # parser.add_argument("out_dir", help="output directory", type=str)
     args = parser.parse_args()
 
     pattern = '^sig_cweights_\d\.\d+_\d\.\d+_\d\.\d+_\d\.\d+_\d\.\d+_\d\.\d+'
 
-    print(" Input directory: ", args.inp_dir)
-    print(" Output directory: ", args.out_dir)
+    # print(" Input directory: ", args.inp_dir)
+    # print(" Output directory: ", args.out_dir)
 
     gr_files_list = filter(is_graph_file, sorted(os.listdir(args.inp_dir)))
-
     gr_files_list_it1, gr_files_list_it2 = itertools.tee(gr_files_list, 2)
-
-    # find all the categories
-    # for each category
-    ## grab all the files in the category
-    ## find the averages of all runtimes for each file in a category
-    ## -- save it into a list
-    ## find the
 
     count = 0
     new_pattern = ""
@@ -65,9 +57,8 @@ def main():
                 category_averages[new_pattern] = 0
             categorized_files[new_pattern].append(gr_file_name)
 
-
     for k in categorized_files.keys():
-        print(" CATEGORY :", k)
+        # print(" CATEGORY :", k)
         i = 0
         file_averages = list()
         for v in categorized_files[k]:
