@@ -12,7 +12,7 @@ def get_x_value(graph_type, x):
     if graph_type == "trials":
         return int(x[11:-1])
     elif graph_type == "initpolicy":
-        return int(x[15:-2])
+        return int(x[21:-1])
     elif graph_type == "maxiter":
         return int(x[12: -1])
     elif graph_type == "revert":
