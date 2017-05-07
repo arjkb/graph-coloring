@@ -43,7 +43,7 @@ def main():
 
     plt.plot(x_vals, y_vals, marker='o')
     plt.xlabel('{} setting'.format(args.inp_file))
-    plt.ylabel('Colors')
+    plt.ylabel('Colors Differences')
     fig = plt.gcf()
     plt.show()
     # fig.savefig('{}.png'.format(args.inp_file), dpi=100)

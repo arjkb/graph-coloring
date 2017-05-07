@@ -10,12 +10,12 @@ def get_output_filepath(directory, filename):
     return os.path.join(directory, filename)
 
 
-def get_file_average(filename):
+def get_file_average(filename, h_index):
     with open(filename, mode='r', encoding='utf-8') as file:
         lines = file.readlines()
         runtimes = list()
         for line in lines:
-            runtimes.append(float(line.strip().split(',')[2]))
+            runtimes.append(float(line.strip().split(',')[h_index]))
         average_runtime = numpy.average(runtimes)
     return average_runtime
 
@@ -77,7 +77,7 @@ def main():
             fname = os.path.join(args.inp_dir, v)
             i += 1
             # print(i, get_file_average(fname))
-            file_averages.append(get_file_average(fname))
+            file_averages.append(get_file_average(fname, 4) - get_file_average(fname, 2))
         category_averages[k] = numpy.average(file_averages)
         del file_averages[:]
 
