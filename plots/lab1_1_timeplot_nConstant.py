@@ -32,6 +32,9 @@ plt.scatter(m, time, color=(cm(1.*9/NUM_COLORS)))
 ax.plot(np.unique(m), np.poly1d(np.polyfit(m, time, 1))(np.unique(m)))
 
 
+m.pop(0)
+time.pop(0)
+
 for x in range(0,100):
     print(str(m[x])+","+str(time[x]))
 
