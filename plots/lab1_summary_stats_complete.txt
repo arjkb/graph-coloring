@@ -1,0 +1,32 @@
+---------Random (i=2^7)-----------
+Color Stats:
+Mean:18.66
+Std:0.47609522857
+Var:0.226666666667
+Skew:-0.675520529473
+Kurtosis:-1.54367201426
+
+Time Stats:
+Mean:10.01292
+Std:0.194396953046
+Var:0.0377901753535
+Skew:8.02389523947
+Kurtosis:8.02389523947
+
+
+---------Greedy-----------
+Color Stats:
+Mean:20.0
+Std:0.0
+Var:0.0
+Skew:0.0
+Kurtosis:-3.0
+
+Time Stats:
+Mean:6.08019
+Std:6.51023775217
+Var:42.3831955898
+Skew:0.624640961307
+Kurtosis:0.624640961307
+
+
