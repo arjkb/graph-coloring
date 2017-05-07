@@ -33,6 +33,8 @@ for x in range (0, 10):
     plt.scatter(n, time, color=(cm(1.*5/NUM_COLORS)))
     ax.plot(np.unique(n), np.poly1d(np.polyfit(n, time, 1))(np.unique(n)))
 
+for x in range (0, 100):
+    print(str(n[x])+","+str(time[x]))
 
 plt.suptitle('Runtime average')
 plt.xlabel('Nodes')
