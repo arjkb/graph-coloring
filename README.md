@@ -2,6 +2,9 @@
 
 [![Python Version](https://img.shields.io/badge/python-v3.6-blue.svg)](https://www.python.org/downloads/release/python-360/)
 
+---
+#### THIS PROJECT IS NO LONGER UNDER DEVELOPMENT.
+---
 
 **The following would work on Linux and Mac.** <br/>
 *I don't know about Windows; give it a shot!*
