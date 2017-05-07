@@ -23,12 +23,11 @@ for i in range(0,12):
             results[x][y][i] = str(n)+ " "+str(m) +" "+ str(colors)+ " "+ str(time) + " "+ str(i)
 
 
-            
+c= []
+t = []     
 for x in range (0,100):
-    c= []
-    t = []
     for y in range(0,100):
-        iter = results[y][x][(int(i))].split(" ")
+        iter = results[y][x][7].split(" ")
         n = iter[0]
         m = iter[1]
         i= 7
@@ -72,10 +71,9 @@ for x in range (0, 100):
         time = float(iter[graphstring]['time'])
         results[x][y] = str(n)+ " "+str(m) +" "+ str(colors)+ " "+ str(time)
 
-
+c= []
+t = []
 for x in range (0,100):
-    c= []
-    t = []
     for y in range(0,100):
         iter = results[y][x].split(" ")
         n = iter[0]
