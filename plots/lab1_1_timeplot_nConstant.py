@@ -10,15 +10,15 @@ with open("lab1_1_summary_stats.txt") as input_file:
 
 i = 0;
 
-time = [[] for y in range(100)]
-m = [[] for y in range(100)]
+time = [100]
+m = [100]
 
 for x in range (0, 100):
     iter = trials[x].split(" ")
     nodes = int(iter[0]);
     index = (nodes/10) - 1
-    time[index].append((float(iter[3])))
-    m[index].append(float(iter[1])/((nodes*(nodes-1))/2) *100)
+    time.append((float(iter[3])))
+    m.append(float(iter[1]))
 
 
 
@@ -26,15 +26,17 @@ cm = plt.get_cmap('gist_rainbow')
 fig = plt.figure(facecolor='white')
 ax = fig.add_subplot(111)
 ax.set_color_cycle([cm(1.*i/NUM_COLORS) for i in range(NUM_COLORS)])
-ax.set_xlim(10,100)
-    
-for x in range (0, 10):
-    #plt.scatter(m[x], time[x], color=(cm(1.*x/NUM_COLORS)))
-    ax.plot(np.unique(m[x]), np.poly1d(np.polyfit(m[x], time[x], 1))(np.unique(m[x])), label = "n="+str((x+1)*10))
+ax.set_xlim(0,5000)
+ax.set_ylim(0,20)
+plt.scatter(m, time, color=(cm(1.*9/NUM_COLORS)))
+ax.plot(np.unique(m), np.poly1d(np.polyfit(m, time, 1))(np.unique(m)))
 
+
+for x in range(0,100):
+    print(str(m[x])+","+str(time[x]))
 
 plt.suptitle('Runtime average')
-plt.xlabel('m % of maximum edges')
+plt.xlabel('m edges')
 plt.ylabel('Runtime in Milliseconds')
 plt.legend(loc=2)
 plt.show();

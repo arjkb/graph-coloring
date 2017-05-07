@@ -14,39 +14,28 @@ with open("lab1_1_summary_stats.txt") as input_file:
 
 i = 0;
 
-time = [[] for y in range(100)]
-n = [[] for y in range(100)]
+time = [100]
+n = [100]
 
 for x in range (0, 100):
     iter = trials[x].split(" ")
-    nodes = int(iter[0])
-    edges = int((float(iter[1]))/(float((nodes*(nodes-1))/2)) *100);
-    index = (roundup(edges)/10) -1
-    time[index].append((float(iter[3])))
-    n[index].append(int(iter[0]))
+    time.append(float(iter[3]))
+    n.append(int(iter[0]))
 
 cm = plt.get_cmap('gist_rainbow')
 fig = plt.figure(facecolor='white')
 ax = fig.add_subplot(111)
 ax.set_color_cycle([cm(1.*i/NUM_COLORS) for i in range(NUM_COLORS)])
 ax.set_xlim(10,100)
+ax.set_ylim(0,20)
     
 for x in range (0, 10):
-    if (x==1):
-        #show the points for a weird outlier graph
-        #plt.scatter(n[x], time[x], color=(cm(1.*x/NUM_COLORS)))
-        #output a text file for further statistical analysis
-        with open("Orange_m=20%_n_time.txt","w") as text_file:
-            for y in range (0,10):
-                nodes = int(n[x][y])
-                maxedges = (float((nodes * (nodes-1))/2))
-                edges = maxedges/10
-                text_file.write(str(nodes) + " " + str(time[x][y]) + "\n")
-    ax.plot(np.unique(n[x]), np.poly1d(np.polyfit(n[x], time[x], 1))(np.unique(n[x])), label = "m="+str((x+1)*10)+"%")
+    plt.scatter(n, time, color=(cm(1.*5/NUM_COLORS)))
+    ax.plot(np.unique(n), np.poly1d(np.polyfit(n, time, 1))(np.unique(n)))
 
 
 plt.suptitle('Runtime average')
-plt.xlabel('n')
+plt.xlabel('Nodes')
 plt.ylabel('Runtime in Milliseconds')
 plt.legend(loc=2)
 plt.show()
