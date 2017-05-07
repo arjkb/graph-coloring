@@ -61,9 +61,13 @@ def main():
 
     plt.figure()
     i=0
+    g=0;
+    #listtoplot = [[] for i in range(63)]
+    listtoplot = list()
+    ["sig_cweights_0.0_0.0_0.0_0.5_0.0_0.5", "sig_cweights_0.0_0.0_0.0_1.0_0.0_0.0", "sig_cweights_0.3333333333333333_0.0_0.0_0.3333333333333333_0.0_0.3333333333333333","sig_cweights_0.0_0.25_0.25_0.25_0.0_0.25","sig_cweights_0.25_0.0_0.25_0.25_0.25_0.0", "sig_cweights_0.3333333333333333_0.3333333333333333_0.3333333333333333_0.0_0.0_0.0"]
     for k in categorized_files.keys():
         #print(" CATEGORY :", k)
-        g = 0
+        
         file_averages = list()
         for v in categorized_files[k]:
             #print(v)
@@ -72,13 +76,22 @@ def main():
             # print(i, get_file_average(fname))
             file_averages.append(get_file_average(fname))
         # boxplot for file_averages
-        if (g==0):
-            plt.boxplot(file_averages[0],0,'')
-            print(file_averages[0])
+        #print(file_averages)
+        #listtoplot[g] = file_averages
+        listtoplot.append(list(file_averages))
+        #print(listtoplot[g])
         category_averages[k] = numpy.average(file_averages)
         del file_averages[:]
         g += 1
+
+        
+    listtoplot.sort(key=lambda x: numpy.mean(x))
+    plt.boxplot(listtoplot)
     plt.show()
+
+    for x in range(0,63):
+        print(numpy.mean(listtoplot[x]))
+    
     #for category in category_averages.keys():
         #print(category_averages[category])
 
