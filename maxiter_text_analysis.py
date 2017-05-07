@@ -15,7 +15,7 @@ def get_file_average(filename):
         lines = file.readlines()
         runtimes = list()
         for line in lines:
-            runtimes.append(float(line.strip().split(',')[0]))
+            runtimes.append(float(line.strip().split(',')[2]))
         average_runtime = numpy.average(runtimes)
     return average_runtime
 
