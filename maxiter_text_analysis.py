@@ -77,7 +77,7 @@ def main():
             fname = os.path.join(args.inp_dir, v)
             i += 1
             # print(i, get_file_average(fname))
-            file_averages.append(get_file_average(fname, 2))
+            file_averages.append(get_file_average(fname, 4) - get_file_average(fname, 2))
         category_averages[k] = numpy.average(file_averages)
         del file_averages[:]
 
