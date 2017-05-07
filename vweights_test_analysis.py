@@ -29,7 +29,7 @@ def main():
     # parser.add_argument("out_dir", help="output directory", type=str)
     args = parser.parse_args()
 
-    pattern = '^sig_cweights_\d\.\d+_\d\.\d+_\d\.\d+_\d\.\d+_\d\.\d+_\d\.\d+'
+    pattern = '^sig_vweights_\d\.\d+_\d\.\d+_\d\.\d+_\d\.\d+_'
 
     # print(" Input directory: ", args.inp_dir)
     # print(" Output directory: ", args.out_dir)

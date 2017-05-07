@@ -29,22 +29,33 @@ def main():
     # parser.add_argument("out_dir", help="output directory", type=str)
     args = parser.parse_args()
 
-    pattern = '^sig_cweights_\d\.\d+_\d\.\d+_\d\.\d+_\d\.\d+_\d\.\d+_\d\.\d+'
-
-    # print(" Input directory: ", args.inp_dir)
-    # print(" Output directory: ", args.out_dir)
+    pattern = '^sig_maxiter_\d+_'
+    pattern_double_dig = '^sig_maxiter_\d\d_'
 
     gr_files_list = filter(is_graph_file, sorted(os.listdir(args.inp_dir)))
-    gr_files_list_it1, gr_files_list_it2 = itertools.tee(gr_files_list, 2)
+    gr_files_list = list(gr_files_list)
 
-    count = 0
-    new_pattern = ""
+    # find the files with a single digit between them, and rename them
+    # to proper format
+    for i in range(len(gr_files_list)):
+        m = re.search(pattern_double_dig, gr_files_list[i])
+        if m is not None:
+            fname = gr_files_list[i]
+            new_name = '{}0{}'.format(fname[:12], fname[12:])
+            old_fpath = os.path.join(args.inp_dir, fname)
+            new_fpath = os.path.join(args.inp_dir, new_name)
+            os.rename(old_fpath, new_fpath)
+
+    # obtain the files list again (since we renamed them)
+    gr_files_list = filter(is_graph_file, sorted(os.listdir(args.inp_dir)))
+    gr_files_list = list(gr_files_list)
+
     current_pattern = ""
     cweights_file_categories = list()
 
     categorized_files = dict()
     category_averages = dict()
-    for gr_file_name in gr_files_list_it1:
+    for gr_file_name in gr_files_list:
         m = re.search(pattern, gr_file_name)
         if m is not None:
             new_pattern = m.group(0)
@@ -62,6 +73,7 @@ def main():
         i = 0
         file_averages = list()
         for v in categorized_files[k]:
+            # print(v)
             fname = os.path.join(args.inp_dir, v)
             i += 1
             # print(i, get_file_average(fname))

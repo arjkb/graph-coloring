@@ -29,7 +29,7 @@ def main():
     # parser.add_argument("out_dir", help="output directory", type=str)
     args = parser.parse_args()
 
-    pattern = '^sig_cweights_\d\.\d+_\d\.\d+_\d\.\d+_\d\.\d+_\d\.\d+_\d\.\d+'
+    pattern = '^sig_initpolicy_\d+_M'
 
     # print(" Input directory: ", args.inp_dir)
     # print(" Output directory: ", args.out_dir)
@@ -62,6 +62,7 @@ def main():
         i = 0
         file_averages = list()
         for v in categorized_files[k]:
+            # print(v)
             fname = os.path.join(args.inp_dir, v)
             i += 1
             # print(i, get_file_average(fname))
