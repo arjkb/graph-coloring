@@ -58,8 +58,8 @@ def main():
              x_vals[args.init_file3], y_vals[args.init_file3],
              marker='o'
              )
-    plt.xlabel('{} setting'.format(args.inp_file))
-    plt.ylabel('runtime (millisecond)')
+    plt.xlabel('Number of nodes'.format(args.inp_file))
+    plt.ylabel('Difference in color')
     fig = plt.gcf()
     plt.show()
     # fig.savefig('{}.png'.format(args.inp_file), dpi=100)
