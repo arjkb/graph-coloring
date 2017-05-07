@@ -16,9 +16,9 @@
 */ 
 
 
-#define REPORTSTATS	1
-#define REPORTCOLORS 1
-#define DEBUG 1
+//#define REPORTSTATS	0
+//#define REPORTCOLORS	0
+//#define DEBUG	0
 #define ASSERT(cond, msg) if (! (cond)) {printf("msg \n"); exit(1);} ;
 
 int numnodes=0;		/* number of nodes in the graph */
@@ -53,12 +53,14 @@ FILE *fp = NULL;
 int initpolicy = 1;
 
 /*Hard coded for testing*/
-int maxiter = 1000;
-int trials = 100;
-int revert = 100;
-int target = 100;
-float ccutoffs[] = {.166, .166, .166, .166, .166, .17}; /* ccutoffs is a 1 by 6 normalized probability vector */
-float vcutoffs[] = {.25, .25, .25, .25}; 				/* vcutoffs is a 1 by 4 normalized probability vector */
+int maxiter = 200;
+int trials = 1;
+int revert = 20;
+int target = 1;
+float ccutoffs[6]; /* ccutoffs is a 1 by 6 normalized probability vector */
+float vcutoffs[4]; 				/* vcutoffs is a 1 by 4 normalized probability vector */
+int initcolors;
+int initcolorscore;
 /*-------------------------------------------------------*/
 /* algorithm statistics																	*/ 
 
@@ -74,6 +76,8 @@ void usage() {
 	printf("--trials <int>			Max trials, default 100\n");
 	printf("--revert <int>			Max number of trials before revert, default 100\n");
 	printf("--target <int>			Expected number of colors, default 100\n");
+	printf("--vweight <int> <int> <int> <int>\n");
+	printf("--cweight <int> <int> <int> <int> <int> <int>\n");
 	printf("-h, --help			Print this message\n");
 }
 
@@ -84,6 +88,14 @@ void parseinput(int argc, char** argv) {
 		exit(1);
 	}
 	initpolicy = atoi(argv[2]);
+
+	for(int x = 0; x < 6; ++x) {
+		ccutoffs[x] = 1.0/6.0;
+	}
+
+	for(int x = 0; x < 4; ++x) {
+		vcutoffs[x] = 1.0/4.0;
+	}
 
 	/*parse flags*/
 	for(int i = 3; i < argc; ++i) {
@@ -102,6 +114,29 @@ void parseinput(int argc, char** argv) {
 		} else if (!strncmp("-h", argv[i], 2) || !strncmp("--help", argv[i], 6)) {
 			usage();
 			exit(0);
+		} else if (!strncmp("--cweight", argv[i], 9)) {
+			++i;
+			ccutoffs[0] = atof(argv[i]);
+			++i;
+			ccutoffs[1] = atof(argv[i]);
+			++i;
+			ccutoffs[2] = atof(argv[i]);
+			++i;
+			ccutoffs[3] = atof(argv[i]);
+			++i;
+			ccutoffs[4] = atof(argv[i]);
+			++i;
+			ccutoffs[5] = atof(argv[i]);
+		} else if (!strncmp("--vweight", argv[i], 9)) {
+			++i;
+			vcutoffs[0] = atof(argv[i]);
+			++i;
+			vcutoffs[1] = atof(argv[i]);
+			++i;
+			vcutoffs[2] = atof(argv[i]);
+			++i;
+			vcutoffs[3] = atof(argv[i]);
+
 		} else {
 			printf("Unknown flag %s \n", argv[i]);
 			exit(1);
@@ -271,7 +306,7 @@ void revertToBest() {
 	int v;
 	for (v=1; v<= numnodes; v++) colorof[v] = bestcoloring[v];
 	curcolors=bestcolors;
-	bestcolorscore= curcolorscore;
+	curcolorscore = bestcolorscore;
 #ifdef DEBUG
 	printf("revert \n");
 #endif 
@@ -530,37 +565,41 @@ result is array cperm[1..numcolors] (just the front): cperm[i] names the ith col
 /*---initialcoloring()--------------------------------------------------*/ 
 void initialcoloring() 
  {
-	 int v,i,r, c, tmp; 
-	 for (i = 1; i<= numnodes; i++)	vperm[i] = i;	 //initialize vertex permutation
-	 for (i = 1; i<= numcolors; i++) cperm[i] = i;	 //initialize	color permutation 
+ 	int v,i,r, c, tmp; 
+	for (i = 1; i<= numnodes; i++)	vperm[i] = i;	 //initialize vertex permutation
+	for (i = 1; i<= numcolors; i++) cperm[i] = i;	 //initialize	color permutation 
 
-	 switch (initpolicy) {
-	 case 1:	// n distinct colors 
-		 for (v=1; v<=numnodes; v++) {
-			 colorof[v] = v;	
-			 colorcount[v]=1; 
-			 curcolorscore += v;
-		 }
-		 curcolors=numnodes; 
-		 curcolorscore += curcolors * numnodes;	
-		 numcolors=curcolors; 
-		 break; 
+	switch (initpolicy) {
+		case 1:	// n distinct colors 
+			for (v=1; v<=numnodes; v++) {
+				colorof[v] = v;	
+				colorcount[v]=1; 
+				curcolorscore += v;
+	 		}
+			curcolors=numnodes; 
+			curcolorscore += curcolors * numnodes;	
+			numcolors=curcolors; 
+			break; 
 	
-	 case 2: // greedy with random vertex order, color order increasing	
-		 for (i = numnodes;	i >= 2; i--){
-			 r =	(int) (drand48() * i) +1 ; //1..i inclusive 
-			 tmp= vperm[i];
-			 vperm[i] = vperm[r];
-			 vperm[r]=tmp;
-		 }
-		 for (v=1; v<= numnodes; v++) {
-			 colorof[v] = 0;	//initialize vertices to not colored 
-		 }
-		 greedycolorgraph(); 
-		 break; 
-	
+		case 2: // greedy with random vertex order, color order increasing	
+			for (i = numnodes;	i >= 2; i--){
+				r =	(int) (drand48() * i) +1 ; //1..i inclusive 
+				tmp= vperm[i];
+				vperm[i] = vperm[r];
+				vperm[r]=tmp;
+			}
+			for (v=1; v<= numnodes; v++) {
+				colorof[v] = 0;	//initialize vertices to not colored 
+			}
+			greedycolorgraph(); 
+			break; 
+		case 3: //greedy fixed vertex order
+			greedycolorgraph();
+			break;
 	 }//switch	
 
+	initcolors = curcolors;
+	initcolorscore = curcolorscore;
 }//initialcoloring 
 
 /*-----------------------------------------------------------*/ 
@@ -591,8 +630,8 @@ void sigcolor() {
 		//vr = (vr+1) % 4; 
 		//cr = (cr+1) % 6;	
 
-	cr = pickRandomColorRule();
-	vr = pickRandomVertexRule();
+		cr = pickRandomColorRule();
+		vr = pickRandomVertexRule();
 
 #ifdef DEBUG
 		printf("\niteration %d color rule %d vertex rule %d\n", t, cr, vr); 
@@ -659,9 +698,10 @@ int	main(int argc, char* argv[])
 #endif 
 
 #ifdef REPORTCOLORS
-			printcolors(0);
-			printcolors(1);
+//			printcolors(0);
+//			printcolors(1);
 #endif 
+			printf("%d,%d,%d,%d\n", bestcolorscore, bestcolors, initcolorscore, initcolors);
 		}//for trials 
 
 		return(0); 
