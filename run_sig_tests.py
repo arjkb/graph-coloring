@@ -29,12 +29,17 @@ def run_vweights(graphs):
 	
 			for g in graphs:
 				g_name = g.split("/")[1];
-				for _ in range(100):
+				for i in range(100):
 					with open("./vweight_test/sig_vweights_"+str(vw_0)+"_"+str(vw_1)+"_"+str(vw_2)+"_"+str(vw_3)+"_"+g_name, "a") as fout:
 						start_time = datetime.now()
-						subprocess.run(["./sig", str(g), str(1), "--vweights", str(vw_0), str(vw_1), str(vw_2), str(vw_3)], stdout=subprocess.PIPE)	
+						output = subprocess.run(["./sig", str(g), str(2), "--vweights", str(vw_0), str(vw_1), str(vw_2), str(vw_3)], stdout=subprocess.PIPE)	
 						elapsed_time = datetime.now() - start_time
-						fout.write(str((elapsed_time.days * 24 * 60 * 60 + elapsed_time.seconds) * 1000 + elapsed_time.microseconds / 1000.0)+"\n")
+						t = str((elapsed_time.days * 24 * 60 * 60 + elapsed_time.seconds) * 1000 + elapsed_time.microseconds / 1000.0)
+						c = output.stdout.decode("utf-8").split("\n")[0].split(",")
+						if len(c) < 4:
+							print(g)
+						else:
+							fout.write(t + "," + c[0] + "," + c[1] + "," + c[2] + "," + c[3] + "\n")
 
 def run_cweights(graphs):
 	
@@ -56,12 +61,17 @@ def run_cweights(graphs):
 	
 			for g in graphs:
 				g_name = g.split("/")[1];
-				for _ in range(100):
-					with open("./cweight_test/sig_cweights_"+str(cw_0)+"_"+str(cw_1)+"_"+str(cw_2)+"_"+str(cw_3)+"_"+"_"+str(cw_4)+"_"+str(cw_5)+"_"+g_name, "a") as fout:
+				for i in range(100):
+					with open("./cweight_test/sig_cweights_"+str(cw_0)+"_"+str(cw_1)+"_"+str(cw_2)+"_"+str(cw_3)+"_"+str(cw_4)+"_"+str(cw_5)+"_"+g_name, "a") as fout:
 						start_time = datetime.now()
-						subprocess.run(["./sig", str(g), str(1), "--cweights", str(cw_0), str(cw_1), str(cw_2), str(cw_3), str(cw_4), str(cw_5)], stdout=subprocess.PIPE)	
+						output = subprocess.run(["./sig", str(g), str(2), "--cweights", str(cw_0), str(cw_1), str(cw_2), str(cw_3), str(cw_4), str(cw_5)], stdout=subprocess.PIPE)	
 						elapsed_time = datetime.now() - start_time
-						fout.write(str((elapsed_time.days * 24 * 60 * 60 + elapsed_time.seconds) * 1000 + elapsed_time.microseconds / 1000.0)+"\n")
+						t = str((elapsed_time.days * 24 * 60 * 60 + elapsed_time.seconds) * 1000 + elapsed_time.microseconds / 1000.0)
+						c = output.stdout.decode("utf-8").split("\n")[0].split(",")
+						if len(c) < 4:
+							print(g)
+						else:
+							fout.write(t + "," + c[0] + "," + c[1] + "," + c[2] + "," + c[3] + "\n")
 
 def run_initpolicy(graphs):
 	
@@ -70,13 +80,18 @@ def run_initpolicy(graphs):
 
 	for g in graphs:
 		g_name = g.split("/")[1];
-		for init in range(1, 3):
-			for _ in range(100):
+		for init in range(1, 4):
+			for i in range(100):
 				with open("./initpolicy_test/sig_initpolicy_"+str(init)+"_"+g_name, "a") as fout:
 					start_time = datetime.now()
-					subprocess.run(["./sig", str(g), str(init)], stdout=subprocess.PIPE)	
+					output = subprocess.run(["./sig", str(g), str(init)], stdout=subprocess.PIPE)	
 					elapsed_time = datetime.now() - start_time
-					fout.write(str((elapsed_time.days * 24 * 60 * 60 + elapsed_time.seconds) * 1000 + elapsed_time.microseconds / 1000.0)+"\n")
+					t = str((elapsed_time.days * 24 * 60 * 60 + elapsed_time.seconds) * 1000 + elapsed_time.microseconds / 1000.0)
+					c = output.stdout.decode("utf-8").split("\n")[0].split(",")
+					if len(c) < 4:
+						print(g)
+					else:
+						fout.write(t + "," + c[0] + "," + c[1] + "," + c[2] + "," + c[3] + "\n")
 
 def run_maxiter(graphs):
 	
@@ -85,13 +100,19 @@ def run_maxiter(graphs):
 
 	for g in graphs:
 		g_name = g.split("/")[1];
-		for maxiter in range(50, 1000, 50):
-			for _ in range(100):
+		for maxiter in range(30, 300, 30):
+			revert = maxiter/10
+			for i in range(100):
 				with open("./maxiter_test/sig_maxiter_"+str(maxiter)+"_"+g_name, "a") as fout:
 					start_time = datetime.now()
-					subprocess.run(["./sig", str(g), str(1), "--maxiter", str(maxiter)], stdout=subprocess.PIPE)	
+					output = subprocess.run(["./sig", str(g), str(2), "--maxiter", str(maxiter), "--revert", str(revert)], stdout=subprocess.PIPE)	
 					elapsed_time = datetime.now() - start_time
-					fout.write(str((elapsed_time.days * 24 * 60 * 60 + elapsed_time.seconds) * 1000 + elapsed_time.microseconds / 1000.0)+"\n")
+					t = str((elapsed_time.days * 24 * 60 * 60 + elapsed_time.seconds) * 1000 + elapsed_time.microseconds / 1000.0)
+					c = output.stdout.decode("utf-8").split("\n")[0].split(",")
+					if len(c) < 4:
+						print(g)
+					else:
+						fout.write(t + "," + c[0] + "," + c[1] + "," + c[2] + "," + c[3] + "\n")
 
 def run_revert(graphs):
 	
@@ -100,28 +121,19 @@ def run_revert(graphs):
 
 	for g in graphs:
 		g_name = g.split("/")[1];
-		for revert in range(5, 100, 5):
-			for _ in range(100):
+		for revert in range(10, 100, 10):
+			for i in range(100):
 				with open("./revert_test/sig_revert_"+str(revert)+"_"+g_name, "a") as fout:
 					start_time = datetime.now()
-					subprocess.run(["./sig", str(g), str(1), "--revert", str(revert)], stdout=subprocess.PIPE)	
+					output = subprocess.run(["./sig", str(g), str(2), "--revert", str(revert)], stdout=subprocess.PIPE)	
 					elapsed_time = datetime.now() - start_time
-					fout.write(str((elapsed_time.days * 24 * 60 * 60 + elapsed_time.seconds) * 1000 + elapsed_time.microseconds / 1000.0)+"\n")
+					t = str((elapsed_time.days * 24 * 60 * 60 + elapsed_time.seconds) * 1000 + elapsed_time.microseconds / 1000.0)
+					c = output.stdout.decode("utf-8").split("\n")[0].split(",")
+					if len(c) < 4:
+						print(g)
+					else:
+						fout.write(t + "," + c[0] + "," + c[1] + "," + c[2] + "," + c[3] + "\n")
 
-def run_trials(graphs):
-	
-	if not os.path.exists("./trials_test"):
-		os.makedirs("./trials_test")
-
-	for g in graphs:
-		g_name = g.split("/")[1];
-		for trials in range(5, 100, 5):
-			for _ in range(100):
-				with open("./trials_test/sig_trials_"+str(1)+"_"+g_name, "a") as fout:
-					start_time = datetime.now()
-					subprocess.run(["./sig", str(g), str(1), "--trials", str(trials)], stdout=subprocess.PIPE)	
-					elapsed_time = datetime.now() - start_time
-					fout.write(str((elapsed_time.days * 24 * 60 * 60 + elapsed_time.seconds) * 1000 + elapsed_time.microseconds / 1000.0)+"\n")
 
 def run_target(graphs):
 	
@@ -130,13 +142,18 @@ def run_target(graphs):
 
 	for g in graphs:
 		g_name = g.split("/")[1];
-		for target in range(5, 100, 5):
-			for _ in range(100):
-				with open("./target_test/sig_target_"+str(1)+"_"+g_name, "a") as fout:
+		for target in range(10, 100, 10):
+			for i in range(100):
+				with open("./target_test/sig_target_"+str(target)+"_"+g_name, "a") as fout:
 					start_time = datetime.now()
-					subprocess.run(["./sig", str(g), str(1), "--target", str(target)], stdout=subprocess.PIPE)	
+					output = subprocess.run(["./sig", str(g), str(2), "--target", str(target)], stdout=subprocess.PIPE)	
 					elapsed_time = datetime.now() - start_time
-					fout.write(str((elapsed_time.days * 24 * 60 * 60 + elapsed_time.seconds) * 1000 + elapsed_time.microseconds / 1000.0)+"\n")
+					t = str((elapsed_time.days * 24 * 60 * 60 + elapsed_time.seconds) * 1000 + elapsed_time.microseconds / 1000.0)
+					c = output.stdout.decode("utf-8").split("\n")[0].split(",")
+					if len(c) < 4:
+						print(g)
+					else:
+						fout.write(t + "," + c[0] + "," + c[1] + "," + c[2] + "," + c[3] + "\n")
 
 def main():
 	if len(sys.argv) < 2:
@@ -145,21 +162,26 @@ def main():
 	
 	graphs = glob.glob(sys.argv[1])
 
+	print("Making sig")
 	make_sig()
 
-	run_vweights(graphs)				
+#	print("Running vweights")
+#	run_vweights(graphs)				
 
-	run_cweights(graphs)
+#	print("Running initpolicy") 
+#	run_initpolicy(graphs)
 
-	run_initpolicy(graphs)
-
+	print("Running maxiter")
 	run_maxiter(graphs)
 
+	print("Running revert")
 	run_revert(graphs)
 
-	run_trials(graphs)
-
+	print("Running target")
 	run_target(graphs)
+
+#	print("Running cweights")
+#	run_cweights(graphs)
 
 if __name__ == "__main__":
 	main()
