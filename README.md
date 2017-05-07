@@ -67,3 +67,10 @@ python3 run_greedy.py --help
 ```
 
 You may have to modify `creategraph.py` to generate the exact type of graphs you want. <br/> E-Mail me for help with this.
+
+---
+### Team Members
+* [Padraic Cashin](https://github.com/Dearth)
+* [Joe Renzullo](https://github.com/joerenzullo)
+* [Austin short](https://github.com/ashort01)
+* [Arjun Krishna Babu](https://github.com/arjunkrishnababu96)
