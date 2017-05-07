@@ -16,9 +16,9 @@
 */ 
 
 
-#define REPORTSTATS	1
-#define REPORTCOLORS 1
-#define DEBUG 1
+//#define REPORTSTATS	0
+//#define REPORTCOLORS	0
+//#define DEBUG	0
 #define ASSERT(cond, msg) if (! (cond)) {printf("msg \n"); exit(1);} ;
 
 int numnodes=0;		/* number of nodes in the graph */
@@ -53,12 +53,14 @@ FILE *fp = NULL;
 int initpolicy = 1;
 
 /*Hard coded for testing*/
-int maxiter = 1000;
-int trials = 100;
-int revert = 100;
-int target = 100;
+int maxiter = 200;
+int trials = 1;
+int revert = 20;
+int target = 1;
 float ccutoffs[6]; /* ccutoffs is a 1 by 6 normalized probability vector */
 float vcutoffs[4]; 				/* vcutoffs is a 1 by 4 normalized probability vector */
+int initcolors;
+int initcolorscore;
 /*-------------------------------------------------------*/
 /* algorithm statistics																	*/ 
 
@@ -304,7 +306,7 @@ void revertToBest() {
 	int v;
 	for (v=1; v<= numnodes; v++) colorof[v] = bestcoloring[v];
 	curcolors=bestcolors;
-	bestcolorscore= curcolorscore;
+	curcolorscore = bestcolorscore;
 #ifdef DEBUG
 	printf("revert \n");
 #endif 
@@ -596,6 +598,8 @@ void initialcoloring()
 			break;
 	 }//switch	
 
+	initcolors = curcolors;
+	initcolorscore = curcolorscore;
 }//initialcoloring 
 
 /*-----------------------------------------------------------*/ 
@@ -626,8 +630,8 @@ void sigcolor() {
 		//vr = (vr+1) % 4; 
 		//cr = (cr+1) % 6;	
 
-	cr = pickRandomColorRule();
-	vr = pickRandomVertexRule();
+		cr = pickRandomColorRule();
+		vr = pickRandomVertexRule();
 
 #ifdef DEBUG
 		printf("\niteration %d color rule %d vertex rule %d\n", t, cr, vr); 
@@ -694,9 +698,10 @@ int	main(int argc, char* argv[])
 #endif 
 
 #ifdef REPORTCOLORS
-			printcolors(0);
-			printcolors(1);
+//			printcolors(0);
+//			printcolors(1);
 #endif 
+			printf("%d,%d,%d,%d\n", bestcolorscore, bestcolors, initcolorscore, initcolors);
 		}//for trials 
 
 		return(0); 
