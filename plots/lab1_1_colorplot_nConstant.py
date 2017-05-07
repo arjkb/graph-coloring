@@ -31,7 +31,10 @@ ax.set_ylim(0,100)
     
 for x in range (0, 10):
     #plt.scatter(m[x], time[x])
-    ax.plot(np.unique(m[x]), np.poly1d(np.polyfit(m[x], colors[x], 1))(np.unique(m[x])), label = "n="+str((x+1)*10))
+    ax.plot(np.unique(m[x]), np.poly1d(np.polyfit(m[x], colors[x], 1))(np.unique(m[x])), label = "n="+str((x+1)*10)+ " r={}")
+    stats = np.polyfit(m[x],colors[x],1,full=True)
+    print("n="+str((x+1)*10)+" r="+str(stats))
+    
 
 
 plt.suptitle('Average Number of Colors')
